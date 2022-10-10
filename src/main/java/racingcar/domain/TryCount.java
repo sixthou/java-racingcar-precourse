@@ -1,5 +1,8 @@
 package racingcar.domain;
 
+import racingcar.common.ErrorMessage;
+import racingcar.common.ValidUtils;
+
 public class TryCount {
 
     public static final int MINIMUM_TRY_COUNT = 0;
@@ -12,20 +15,15 @@ public class TryCount {
 
     private void validTryCount(String numberString) {
 
-        for (int i = 0; i < numberString.length(); i++) {
-            isNumber(numberString.charAt(i));
+        if (ValidUtils.stringIsNotDigit(numberString)) {
+            throw new IllegalArgumentException(ErrorMessage.TRY_COUNT_NOT_A_NUMBER.toString());
         }
 
-        if (Integer.parseInt(numberString) < MINIMUM_TRY_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 시도 횟수는 0회 이상만 가능하다.");
+        if (ValidUtils.integerLessThenMinNumber(Integer.parseInt(numberString), MINIMUM_TRY_COUNT)) {
+            throw new IllegalArgumentException(ErrorMessage.TRY_COUNT_LESS_THEN_ZERO.toString());
         }
     }
 
-    private void isNumber(char c) {
-        if (!Character.isDigit(c)) {
-            throw new IllegalArgumentException("[ERROR] 시도 횟수는 숫자여야 한다.");
-        }
-    }
 
     public void tryOnce() {
         count--;
