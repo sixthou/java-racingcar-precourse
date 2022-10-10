@@ -10,4 +10,5 @@ public interface Output {
 
     void printWinners(List<String> names);
 
+    void printError(String error);
 }

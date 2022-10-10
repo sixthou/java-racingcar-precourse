@@ -26,4 +26,8 @@ public class StandardOutput implements Output {
         System.out.println("최종 우승자 : " + stringJoiner);
     }
 
+    @Override
+    public void printError(String error) {
+        System.out.println(error);
+    }
 }
